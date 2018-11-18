@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Starter Template for Bootstrap</title>
+
+	 <!-- Latest compiled and minified CSS -->
+	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
+	
+	<script type="text/javascript">
+ 
+   $(document).ready(function() {
+    $('#reg_form').bootstrapValidator({
+        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            firstName: {
+                validators: {
+                        stringLength: {
+                        min: 2,
+                    },
+                        notEmpty: {
+                        message: 'Please supply your first name'
+                    }
+                }
+            },
+             lastName: {
+                validators: {
+                     stringLength: {
+                        min: 2,
+                    },
+                    notEmpty: {
+                        message: 'Please supply your last name'
+                    }
+                }
+            },
+           
+	 email: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please supply your email address'
+                    },
+                    emailAddress: {
+                        message: 'Please supply a valid email address'
+                    }
+                }
+            },
+					
+	password: {
+            validators: {
+                identical: {
+                    field: 'confirmPassword',
+                    message: 'Confirm your password below - type same password please'
+                }
+            }
+        },
+        confirmPassword: {
+            validators: {
+                identical: {
+                    field: 'password',
+                    message: 'The password and its confirm are not the same'
+                }
+            }
+         },
+			
+            
+            }
+        })
+		
+ 	
+        .on('success.form.bv', function(e) {
+            $('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
+                $('#reg_form').data('bootstrapValidator').resetForm();
+			/*
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the BootstrapValidator instance
+            var bv = $form.data('bootstrapValidator');
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                console.log(result);
+            }, 'json');*/
+        });
+});
+
+</script>
+
+  </head>
+
+  <body>
+
+  <nav class="nav navbar-default">
+  	<div class="container">
+  		<div class="navbar-header">
+  			<a class="navbar-brand" href="#">Some Company</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nb-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+  		</div>
+  		<div class="collapse navbar-collapse" id="nb-collapse">
+	  		<ul class="nav navbar-nav">
+	  			<li class="active"><a href="#">Home</a></li>
+	  			<li><a href="#">Browse</a></li>
+	  			<li><a href="#">Search</a></li>
+	  		</ul>
+	  		<ul class="navbar-nav nav navbar-right">
+  				<li><a href="#">Login</a></li>
+  			</ul>
+	  	</div>
+  	</div>
+ </nav>
+    <div class="container">
+	<h1 class="text-center">Registration</h1>
+		<form class="form-horizontal" id="reg_form" role="form" method = "post" action = "Register"">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="email">Email</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="email" placeholder="Enter your email">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="firstName">First Name:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="firstName" placeholder="Enter your first name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="lastName">Last Name:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="lastName" placeholder="Enter your last name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="password">Password</label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" name="password" placeholder="">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="password">Password</label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" name="confirmPassword" placeholder="">
+				</div>
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+    </div>
+  </body>
+</html>
